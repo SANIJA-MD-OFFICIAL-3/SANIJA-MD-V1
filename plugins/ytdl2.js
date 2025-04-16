@@ -1,126 +1,128 @@
 const config = require('../config');
 const { cmd } = require('../command');
-const { ytsearch } = require('@dark-yasiya/yt-dl.js');
+const { ytsearch, ytmp3, ytmp4 } = require('@dark-yasiya/yt-dl.js'); 
 
-// Video Downloader Command
-cmd({  
-    pattern: "video", 
-    alias: ["mp4", "ytv"], 
-    react: "🎥", 
-    desc: "Download Youtube Video", 
-    category: "main", 
-    use: '.video <YouTube URL or Name>', 
-    filename: __filename 
-}, async (conn, mek, m, { from, q, reply }) => { 
-    try { 
-        if (!q) return await reply("*Please provide a YouTube URL or video name.*");
+// video
 
-        const yt = await ytsearch(q);
-        if (!yt.results || yt.results.length < 1) return reply("❌ No results found!");
-
-        const yts = yt.results[0];  
-        const apiUrl = `https://apis.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(yts.url)}`;
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-
-        if (data.status !== 200 || !data.success || !data.result.download_url) {
-            return reply("❌ Failed to fetch the video.");
-        }
-
-        const videoInfo = `🎬 *YOUTUBE VIDEO INFO*
-        
-📌 *Title:* ${yts.title}
-⏱️ *Duration:* ${yts.timestamp}
-👁️ *Views:* ${yts.views}
-🎙️ *Author:* ${yts.author.name}
-🔗 *Link:* ${yts.url}
-
-Choose how you want to receive the video👇`;
-
-        await conn.sendMessage(from, {
-            image: { url: data.result.thumbnail },
-            caption: videoInfo,
-            buttons: [
-                { buttonId: `video_file ${data.result.download_url}`, buttonText: { displayText: "📽️ Video File" }, type: 1 },
-                { buttonId: `video_doc ${data.result.download_url}`, buttonText: { displayText: "📁 Document" }, type: 1 }
-            ],
-            footer: "Powered by SANIJA-MD",
-        }, { quoted: mek });
-
-    } catch (e) {
-        console.error(e);
-        reply("An unexpected error occurred.");
-    }
-});
-
-// Audio Downloader Command
 cmd({ 
-    pattern: "mp3", 
-    alias: ["yta", "play"], 
-    react: "🎶", 
-    desc: "Download Youtube song",
+    pattern: "mp4", 
+    alias: ["video", "ytv"], 
+    react: "🎥", 
+    desc: "Download Youtube song", 
     category: "main", 
-    use: '.mp3 <YouTube URL or Name>', 
+    use: '.song < Yt url or Name >', 
     filename: __filename 
-}, async (conn, mek, m, { from, q, reply }) => { 
-    try {
-        if (!q) return await reply("*Please provide a YouTube URL or Song Name.*");
-
+}, async (conn, mek, m, { from, prefix, quoted, q, reply }) => { 
+    try { 
+        if (!q) return await reply("*𝐏lease provide a YouTube url or Video Name..*");
+        
         const yt = await ytsearch(q);
-        if (!yt.results || yt.results.length < 1) return reply("❌ No results found!");
-
-        const yts = yt.results[0];  
-        const apiUrl = `https://apis.davidcyriltech.my.id/youtube/mp3?url=${encodeURIComponent(yts.url)}`;
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-
-        if (data.status !== 200 || !data.success || !data.result.downloadUrl) {
-            return reply("❌ Failed to fetch the audio.");
+        if (yt.results.length < 1) return reply("No results found!");
+        
+        let yts = yt.results[0];  
+        let apiUrl = `https://apis.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(yts.url)}`;
+        
+        let response = await fetch(apiUrl);
+        let data = await response.json();
+        
+        if (data.status !== 200 || !data.success || !data.result.download_url) {
+            return reply("Failed to fetch the video. Please try again later.");
         }
+        
+        let ytmsg = `╔═══〔 *𓆩SANIJA-MD ᪳𓆪* 〕═══❒
+║╭───────────────◆  
+║│ *❍ ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ*
+║╰───────────────◆
+╚══════════════════❒
+╔══════════════════❒
+║ ⿻ *ᴛɪᴛʟᴇ:*  ${yts.title}
+║ ⿻ *ᴅᴜʀᴀᴛɪᴏɴ:*  ${yts.timestamp}
+║ ⿻ *ᴠɪᴇᴡs:*  ${yts.views}
+║ ⿻ *ᴀᴜᴛʜᴏʀ:*  ${yts.author.name}
+║ ⿻ *ʟɪɴᴋ:*  ${yts.url}
+╚══════════════════❒
+> *Powered by SANIJA-MD*`;
 
-        const audioMsg = `🎵 *YOUTUBE AUDIO INFO*
-
-📌 *Title:* ${yts.title}
-⏱️ *Duration:* ${yts.timestamp}
-👁️ *Views:* ${yts.views}
-🎙️ *Author:* ${yts.author.name}
-🔗 *Link:* ${yts.url}
-
-Choose how you want to receive the audio👇`;
-
-        await conn.sendMessage(from, {
-            image: { url: data.result.image },
-            caption: audioMsg,
-            buttons: [
-                { buttonId: `audio_file ${data.result.downloadUrl}`, buttonText: { displayText: "🎧 Audio File" }, type: 1 },
-                { buttonId: `audio_doc ${data.result.downloadUrl}`, buttonText: { displayText: "📁 Document" }, type: 1 }
-            ],
-            footer: "Powered by SANIJA-MD 🍉",
+        // Send video details
+        await conn.sendMessage(from, { image: { url: data.result.thumbnail || '' }, caption: ytmsg }, { quoted: mek });
+        
+        // Send video file
+        await conn.sendMessage(from, { video: { url: data.result.download_url }, mimetype: "video/mp4" }, { quoted: mek });
+        
+        // Send document file (optional)
+        await conn.sendMessage(from, { 
+            document: { url: data.result.download_url }, 
+            mimetype: "video/mp4", 
+            fileName: `${data.result.title}.mp4`, 
+            caption: `*${yts.title}*\n> *© Powered by SANIJA-MD 🎐*`
         }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
-        reply("An unexpected error occurred.");
+        reply("An error occurred. Please try again later.");
     }
-});
+});  
+       
+// play
 
-// Button Handlers
-cmd({ pattern: "video_file", hidden: true }, async (conn, mek, m, { from, args }) => {
-    const url = args[0];
-    await conn.sendMessage(from, { video: { url }, mimetype: "video/mp4" }, { quoted: mek });
-});
+cmd({ 
+     pattern: "mp3", 
+     alias: ["yta", "play"], 
+     react: "🎶", 
+     desc: "Download Youtube song",
+     category: "main", 
+     use: '.song < Yt url or Name >', 
+     filename: __filename }, 
+     async (conn, mek, m, { from, prefix, quoted, q, reply }) => 
+     
+     { try { if (!q) return await reply("*𝐏lease providea YouTube url or Song Name.*");
 
-cmd({ pattern: "video_doc", hidden: true }, async (conn, mek, m, { from, args }) => {
-    const url = args[0];
-    await conn.sendMessage(from, { document: { url }, mimetype: "video/mp4", fileName: "video.mp4" }, { quoted: mek });
-});
+const yt = await ytsearch(q);
+    if (yt.results.length < 1) return reply("No results found!");
+    
+    let yts = yt.results[0];  
+    let apiUrl = `https://apis.davidcyriltech.my.id/youtube/mp3?url=${encodeURIComponent(yts.url)}`;
+    
+    let response = await fetch(apiUrl);
+    let data = await response.json();
+    
+    if (data.status !== 200 || !data.success || !data.result.downloadUrl) {
+        return reply("Failed to fetch the audio. Please try again later.");
+    }
+    
+    let ytmsg = `╔═══〔 *𓆩SANIJA-MD𓆪* 〕═══❒
+║╭───────────────◆  
+║│ **❍ auᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ**
+║╰───────────────◆
+╚══════════════════❒
+╔══════════════════❒
+║ ⿻ *ᴛɪᴛʟᴇ:*  ${yts.title}
+║ ⿻ *ᴅᴜʀᴀᴛɪᴏɴ:*  ${yts.timestamp}
+║ ⿻ *ᴠɪᴇᴡs:*  ${yts.views}
+║ ⿻ *ᴀᴜᴛʜᴏʀ:*  ${yts.author.name}
+║ ⿻ *ʟɪɴᴋ:*  ${yts.url}
+╚══════════════════❒
+Powered by SANIJA-MD 🍉*`;
 
-cmd({ pattern: "audio_file", hidden: true }, async (conn, mek, m, { from, args }) => {
-    const url = args[0];
-    await conn.sendMessage(from, { audio: { url }, mimetype: "audio/mpeg" }, { quoted: mek });
-});
 
-cmd({ pattern: "audio_doc", hidden: true }, async (conn, mek, m, { from, args }) => {
-    const url = args[0];
-    await conn.sendMessage(from, { document: { url }, mimetype: "audio/mpeg", fileName: "audio.mp3" }, { quoted: mek });
+
+// Send song details
+    await conn.sendMessage(from, { image: { url: data.result.image || '' }, caption: ytmsg }, { quoted: mek });
+    
+    // Send audio file
+    await conn.sendMessage(from, { audio: { url: data.result.downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
+    
+    // Send document file
+    await conn.sendMessage(from, { 
+        document: { url: data.result.downloadUrl }, 
+        mimetype: "audio/mpeg", 
+        fileName: `${data.result.title}.mp3`, 
+        caption: `> *© Powered by SANIJA-MD 🎐*`
+    }, { quoted: mek });
+
+} catch (e) {
+    console.log(e);
+    reply("An error occurred. Please try again later.");
+}
+
 });
