@@ -46,7 +46,7 @@ _*🌟 Reply with the Number you want to select*_
 
 > *𝙋𝙊𝙒𝙀𝙍𝙀𝘿 𝘽𝙔 SANIJA-MD*`;
 
-        const vv = await conn.sendMessage(from, { image: { url: config.MENU_IMG}, caption: desc }, { quoted: mek });
+        const vv = await conn.sendMessage(from, { image: { url:"https://files.catbox.moe/uhn8p1.png"}, caption: desc }, { quoted: mek });
 
         conn.ev.on('messages.upsert', async (msgUpdate) => {
             const msg = msgUpdate.messages[0];
