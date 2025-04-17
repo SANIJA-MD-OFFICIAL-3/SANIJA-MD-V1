@@ -13,7 +13,12 @@
  AUTO_REPLY: process.env.AUTO_REPLY || "false",
  ALIVE_IMG: process.env.ALIVE_IMG || "https://files.catbox.moe/b61wmw.png",
  MENU_IMG: process.env.MENU_IMG || "https://files.catbox.moe/uhn8p1.png",
- ALIVE_MSG: process.env.ALIVE_MSG || "_Hi 💁🏽 How Can I Assist You. I Am alive Now. Thank You For Installing Me To Your Whatsapp_",
+ ALIVE_MSG: process.env.ALIVE_MSG || "_Hi 💁🏽 How Can I Assist You. I Am alive Now. Thank You For Installing Me To Your Whatsapp/n/n/ *╭─「SANIJA-MD-V1」*
+*│◈ ʀᴜɴᴛɪᴍᴇ : ${runtime(process.uptime())}*
+*│◈ ʀᴀᴍ ᴜꜱᴀɢᴇ : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB*
+*│◈ ᴘʟᴀᴛꜰᴏʀᴍ : ${os.hostname()}*
+*│◈ ᴠᴇʀꜱɪᴏɴ : 1.0.0*
+*╰──────────●●►*",
  ANTI_LINK: process.env.ANTI_LINK || "true",
  ANTI_BAD: process.env.ANTI_BAD || "true",
  PREFIX: process.env.PREFIX || ".",
