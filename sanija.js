@@ -1,8 +1,11 @@
+ const fs = require('fs');
+ if (fs.existsSync('sanija.env')) require('dotenv').sanija({ path: './sanija.env' });
+ 
+ function convertToBool(text, fault = 'true') {
+     return text === fault ? true : false;
  }
  module.exports = {
- SESSION_ID: process.env.SESSION_ID || "4CU3XKxa#fS4QKmaBJjHMXKw7yIhN8kzJLCn8UOe2olVcph2yDdU",
  AUTO_READ_STATUS: process.env.AUTO_READ_STATUS || "true",
- MODE: process.env.MODE || "private",
  AUTO_VOICE: process.env.AUTO_VOICE || "false",
  AUTO_STICKER: process.env.AUTO_STICKER || "false",
  AUTO_REPLY: process.env.AUTO_REPLY || "false",
