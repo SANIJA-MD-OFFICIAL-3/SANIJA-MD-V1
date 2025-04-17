@@ -1,15 +1,4 @@
-/**
 
-
- Copyright (C) 2025.
- Licensed under the  GPL-3.0 License;
- You may not sell this script.
- It is supplied in the hope that it may be useful.
- * @project_name : PAID Bot script
- * @author : SANIJA NIMTHARU
- * @description : A Multi-functional whatsapp bot script.
- * @version 1.0.0
- **/
 
 
  const fs = require('fs');
