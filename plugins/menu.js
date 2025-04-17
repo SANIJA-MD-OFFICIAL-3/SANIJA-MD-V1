@@ -26,7 +26,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
     try {
         let desc = `*👋 Hello ${pushname}*
 
-*╭─「 ${config.BOT_NAME} 」*
+*╭─「SANIJA-MD-V1」*
 *│◈ ʀᴜɴᴛɪᴍᴇ : ${runtime(process.uptime())}*
 *│◈ ʀᴀᴍ ᴜꜱᴀɢᴇ : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB*
 *│◈ ᴘʟᴀᴛꜰᴏʀᴍ : ${os.hostname()}*
