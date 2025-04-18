@@ -1,0 +1,59 @@
+
+{
+    "bot-name": "SANIJA-MD",
+    "description": "SANIJA-MD made for people on Earth",
+    "logo": "https://raw.githubusercontent.com/HyHamza/HyHamza/refs/heads/main/Images/XByte-logo.png",
+    "keywords": ["bot"],
+    "documentation-link": "https://replit.com/@ddswwds/oror?v=1#main.sh",
+    "owner-verification":"ddswwds@gmail.com",
+  
+    "env": {
+      "SESSION_ID": {
+        "description": "Put your SESSION_ID here. Make sure it starts with Byte;;;, or get session id from here, https://session.talkdrove.com",
+        "value":"",
+        "required": true
+        
+      },
+      "PREFIX": {
+        "description": "Bot command prefix, (e.g, . , ! @ etc",
+        "value":".",
+        "required": true
+        
+      },
+      "AUTO_READ_STATUS": {
+        "description": "Bot will all status, To Enable put true and to disable put false (e.g, true)",
+        "value":"true",
+        "required": false
+        
+      },
+      "MODE": {
+        "description": "Bot mode can be public, private, inbox or groups in small letters (e.g, public)",
+        "value":"public",
+        "required": true
+
+      },
+  
+      "AUTO_REPLY": {
+        "description": "Bot will reply to the msgs like gm, gn, love you, hate you, hi, etc... To Enable put true and to disable put false (e.g, true)",
+        "value":"false",
+        "required": false
+        
+      },
+      "AUTO_REACT": {
+        "description": "Bot will react to the msgs, To Enable put true and to disable put false (e.g, true)",
+        "value":"false",
+        "required": false
+        
+      },
+
+        
+      },
+      "ALWAYS_ONLINE": {
+        "description": "Keep your WhatsApp always online put true to activate (e.g, true)",
+        "value":"false",
+        "required": false
+        
+      }
+    }
+  
+  }
