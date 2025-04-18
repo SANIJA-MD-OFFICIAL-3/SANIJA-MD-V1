@@ -2,92 +2,113 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-class SinhalaSubMoviePlugin {
-  constructor() {
-    this.apiKey = "sky|be538a46034c192460b9ac614a00d705c7fbd7cb";
-    this.apiBase = "https://api.skymansion.site/movies-dl/search";
-  }
+const API_KEY = "sky|be538a46034c192460b9ac614a00d705c7fbd7cb";
+const API_BASE = "https://api.skymansion.site/movies-dl/search";
 
-  async searchMovie(query) {
-    const res = await axios.get(this.apiBase, {
-      params: {
-        q: query,
-        api_key: this.apiKey
-      }
-    });
+module.exports = {
+  name: 'sinhalasub',
+  alias: [],
+  category: 'Movies',
+  desc: '🎬 Download movies directly from SinhalaSub (Button Mode)',
+  use: '<movie name>',
 
-    if (res.data && res.data.success && res.data.result.length > 0) {
-      return res.data.result[0]; // pick first result
+  async run({ conn, m, text, prefix }) {
+    if (!text) {
+      return m.reply(`🎬 Please provide a movie name!\n\n_Example:_ ${prefix}sinhalasub Deadpool`);
     }
-    throw new Error('Movie not found.');
-  }
 
-  async sendMovieSelection(ctx, movieName) {
     try {
-      const movie = await this.searchMovie(movieName);
+      await m.react('🎬'); // React when starting search
 
-      if (!movie.download || movie.download.length === 0) {
-        throw new Error('No download links available.');
+      const res = await axios.get(API_BASE, {
+        params: {
+          q: text,
+          api_key: API_KEY
+        }
+      });
+
+      if (!res.data || !res.data.success || res.data.result.length === 0) {
+        await m.react('❌');
+        return m.reply('❌ Movie not found on SinhalaSub.');
       }
 
-      const qualityButtons = movie.download.map(dl => ({
-        buttonId: `movie_dl_${Buffer.from(dl.url).toString('base64')}`, // Encode URL
+      const movie = res.data.result[0];
+      const downloadOptions = movie.download;
+
+      if (!downloadOptions || downloadOptions.length === 0) {
+        await m.react('❌');
+        return m.reply('❌ No available download links for this movie.');
+      }
+
+      // Create buttons for each available quality
+      const buttons = downloadOptions.map(dl => ({
+        buttonId: `dl_movie_${Buffer.from(JSON.stringify(dl)).toString('base64')}`,
         buttonText: { displayText: `🎥 ${dl.quality}` },
         type: 1
       }));
 
-      await ctx.sendMessage(ctx.chat, {
-        text: `🎬 *${movie.title}*\n\nChoose your preferred quality:\n\n©️ SANIJA-MD`,
-        buttons: qualityButtons,
+      await conn.sendMessage(m.chat, {
+        text: `🎬 *${movie.title}*\n\n🔰 Select your preferred quality to download:\n\n©️ SANIJA-MD`,
+        buttons,
         headerType: 1
-      });
+      }, { quoted: m });
 
     } catch (err) {
       console.error(err);
-      await ctx.reply('❌ Movie not found or no download links.');
+      await m.react('⚠️');
+      await conn.reply(m.chat, '❌ Error fetching movie data.', m);
+    }
+  },
+
+  async before({ conn, m }) {
+    if (!m.buttonId) return;
+
+    if (m.buttonId.startsWith('dl_movie_')) {
+      try {
+        const encoded = m.buttonId.split('dl_movie_')[1];
+        const downloadInfo = JSON.parse(Buffer.from(encoded, 'base64').toString('ascii'));
+
+        const url = downloadInfo.url;
+        const quality = downloadInfo.quality;
+        const fileName = `SANIJA-MD_${Date.now()}_${quality}.mp4`;
+        const tempFilePath = path.join(__dirname, fileName);
+
+        await m.react('📥'); // React when downloading starts
+
+        await conn.reply(m.chat, `⏳ Downloading *${quality}* quality movie...\n\nPlease wait...\n\n©️ SANIJA-MD`, m);
+
+        const response = await axios({
+          url,
+          method: 'GET',
+          responseType: 'stream'
+        });
+
+        const writer = fs.createWriteStream(tempFilePath);
+        response.data.pipe(writer);
+
+        await new Promise((resolve, reject) => {
+          writer.on('finish', resolve);
+          writer.on('error', reject);
+        });
+
+        await m.react('📤'); // React when uploading starts
+
+        await conn.reply(m.chat, '⏫ Uploading movie file...\n\nAlmost done!\n\n©️ SANIJA-MD', m);
+
+        await conn.sendMessage(m.chat, {
+          document: fs.readFileSync(tempFilePath),
+          mimetype: 'video/mp4',
+          fileName: fileName
+        }, { quoted: m });
+
+        fs.unlinkSync(tempFilePath); // Delete temp file after sending
+        await m.react('✅'); // Finished successfully!
+
+      } catch (err) {
+        console.error(err);
+        await m.react('❌');
+        await conn.reply(m.chat, '❌ Failed to download or upload the movie.', m);
+      }
     }
   }
-
-  async downloadMovie(url, filename) {
-    const filePath = path.resolve(__dirname, filename);
-    const writer = fs.createWriteStream(filePath);
-
-    const response = await axios({
-      url,
-      method: 'GET',
-      responseType: 'stream'
-    });
-
-    response.data.pipe(writer);
-
-    return new Promise((resolve, reject) => {
-      writer.on('finish', () => resolve(filePath));
-      writer.on('error', reject);
-    });
-  }
-
-  async handleQualityDownload(ctx, encodedUrl) {
-    try {
-      const url = Buffer.from(encodedUrl, 'base64').toString('ascii');
-      const filename = `SANIJA-MD_${Date.now()}.mp4`;
-
-      await ctx.reply('⏳ Downloading movie file, please wait...\n\n©️ SANIJA-MD');
-      const filePath = await this.downloadMovie(url, filename);
-
-      await ctx.reply('⏫ Uploading movie file, please wait...\n\n©️ SANIJA-MD');
-      await ctx.sendMessage(ctx.chat, {
-        document: fs.readFileSync(filePath),
-        mimetype: 'video/mp4',
-        fileName: filename
-      });
-
-      fs.unlinkSync(filePath);
-
-    } catch (err) {
-      console.error(err);
-      await ctx.reply('❌ Failed to download or upload the movie.');
-    }
-  }
-}
-
-module.exports = new SinhalaSubMoviePlugin();
+};
