@@ -1,154 +1,173 @@
-const config = require('../config');
 const { cmd } = require('../command');
 const { ytsearch } = require('@dark-yasiya/yt-dl.js');
-const fetch = require('node-fetch');
+const fetch = require("node-fetch");
 
-// Helper for Progress Bar
-function createProgressBar(percentage) {
-  const totalBlocks = 20;
-  const filledBlocks = Math.round((percentage / 100) * totalBlocks);
-  const emptyBlocks = totalBlocks - filledBlocks;
-  return `⏳ [${'●'.repeat(filledBlocks)}${'○'.repeat(emptyBlocks)}] ${percentage}%`;
-}
+let activeDownloads = new Map();
 
-// Premium YTMP4 Command
+/*
+  𓆩SANIJA-MD𓆪 🎐 
+  YouTube Downloader
+  Split into: 
+    ▶️ .ytv (Video Download)
+    🎵 .yta (Audio Download)
+*/
+
+// ▶️ VIDEO DOWNLOAD - .ytv
 cmd({
-  pattern: "mp4",
-  alias: ["video", "ytv"],
-  react: "🎥",
-  desc: "Download Youtube Video",
-  category: "main",
-  use: '.mp4 < YT url or Name >',
-  filename: __filename
-}, async (conn, mek, m, { from, q, reply, quoted }) => {
+  pattern: "ytv",
+  alias: ["youtubevideo", "ytmp4"],
+  desc: "Download YouTube Video",
+  category: "media",
+  filename: __filename,
+  use: '.ytv <url or search>'
+}, async (conn, mek, m, { q, from, reply }) => {
+  if (!q) return reply("*🎥 Provide a YouTube link or name to download video.*");
+
   try {
-    if (!q) return reply("*Please provide a YouTube URL or Video Name.*");
-
     const yt = await ytsearch(q);
-    if (yt.results.length < 1) return reply("No results found!");
+    if (!yt.results.length) return reply("❌ No results found.");
 
-    const yts = yt.results[0];
-    const apiUrl = `https://apis.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(yts.url)}`;
+    const vid = yt.results[0];
+    const thumb = vid.thumbnail || "https://telegra.ph/file/36c1e1e487d9c39a8c1d0.jpg";
 
-    let response = await fetch(apiUrl);
-    let data = await response.json();
-
-    if (data.status !== 200 || !data.success || !data.result.download_url) {
-      return reply("Failed to fetch the video. Try again later.");
-    }
-
-    let progressMessage = await conn.sendMessage(from, { text: createProgressBar(0) }, { quoted: mek });
-    let percent = 0;
-    let interval = setInterval(async () => {
-      percent += 10;
-      if (percent > 100) percent = 100;
-      await conn.sendMessage(from, { edit: progressMessage.key, text: createProgressBar(percent) });
-      if (percent === 100) clearInterval(interval);
-    }, 1000);
-
-    let ytmsg = `
-🎵 *YouTube Video Downloader*
-
-✨ *Title:* ${yts.title}
-🕗 *Duration:* ${yts.timestamp}
-📈 *Views:* ${yts.views}
-👤 *Author:* ${yts.author.name}
-🔗 *Link:* ${yts.url}
-
-> *Powered by  💫 SANIJA-MD 🌐*`;
+    const caption = `╔═══〔 *𓆩SANIJA-MD𓆪 🎐* 〕═══
+║ 🎬 *Title:* ${vid.title}
+║ ⏱️ *Duration:* ${vid.timestamp}
+║ 👁️ *Views:* ${vid.views}
+║ 🎙️ *Channel:* ${vid.author.name}
+║ 🔗 *Link:* ${vid.url}
+╚═══════════════════`;
 
     const buttons = [
-      { buttonId: `${config.prefix}cancel`, buttonText: { displayText: '❌ Cancel' }, type: 1 },
-      { buttonId: `${config.prefix}doc`, buttonText: { displayText: '📄 Document' }, type: 1 },
-      { buttonId: `${config.prefix}watch`, buttonText: { displayText: '▶️ Watch' }, type: 1 }
+      { buttonId: `download_video ${vid.url}`, buttonText: { displayText: "🎥 Download Video" }, type: 1 },
+      { buttonId: `cancel_dl`, buttonText: { displayText: "❌ Cancel" }, type: 1 }
     ];
 
     await conn.sendMessage(from, {
-      image: { url: data.result.thumbnail || '' },
-      caption: ytmsg,
-      buttons: buttons,
+      image: { url: thumb },
+      caption,
+      footer: "Powered by 𓆩SANIJA-MD𓆪 🎐",
+      buttons,
       headerType: 4
     }, { quoted: mek });
 
-    setTimeout(async () => {
-      await conn.sendMessage(from, { delete: progressMessage.key });
-    }, 30000);
-
-    await conn.sendMessage(from, { video: { url: data.result.download_url }, mimetype: 'video/mp4' }, { quoted: mek });
-
   } catch (e) {
     console.log(e);
-    reply("Error occurred, please try again later.");
+    reply("❌ Error occurred during video search.");
   }
 });
 
-// Premium YTMP3 Command
+// 🎵 AUDIO DOWNLOAD - .yta
 cmd({
-  pattern: "mp3",
-  alias: ["yta", "play"],
-  react: "🎶",
-  desc: "Download Youtube Audio",
-  category: "main",
-  use: '.mp3 < YT url or Name >',
-  filename: __filename
-}, async (conn, mek, m, { from, q, reply, quoted }) => {
+  pattern: "yta",
+  alias: ["youtubemp3", "ytaudio"],
+  desc: "Download YouTube Audio",
+  category: "media",
+  filename: __filename,
+  use: '.yta <url or search>'
+}, async (conn, mek, m, { q, from, reply }) => {
+  if (!q) return reply("*🎶 Provide a YouTube link or name to download audio.*");
+
   try {
-    if (!q) return reply("*Please provide a YouTube URL or Song Name.*");
-
     const yt = await ytsearch(q);
-    if (yt.results.length < 1) return reply("No results found!");
+    if (!yt.results.length) return reply("❌ No results found.");
 
-    const yts = yt.results[0];
-    const apiUrl = `https://apis.davidcyriltech.my.id/youtube/mp3?url=${encodeURIComponent(yts.url)}`;
+    const vid = yt.results[0];
+    const thumb = vid.thumbnail || "https://telegra.ph/file/36c1e1e487d9c39a8c1d0.jpg";
 
-    let response = await fetch(apiUrl);
-    let data = await response.json();
-
-    if (data.status !== 200 || !data.success || !data.result.downloadUrl) {
-      return reply("Failed to fetch the audio. Try again later.");
-    }
-
-    let progressMessage = await conn.sendMessage(from, { text: createProgressBar(0) }, { quoted: mek });
-    let percent = 0;
-    let interval = setInterval(async () => {
-      percent += 10;
-      if (percent > 100) percent = 100;
-      await conn.sendMessage(from, { edit: progressMessage.key, text: createProgressBar(percent) });
-      if (percent === 100) clearInterval(interval);
-    }, 1000);
-
-    let ytmsg = `
-🎵 *YouTube Audio Downloader*
-
-✨ *Title:* ${yts.title}
-🕗 *Duration:* ${yts.timestamp}
-📈 *Views:* ${yts.views}
-👤 *Author:* ${yts.author.name}
-🔗 *Link:* ${yts.url}
-
-> *Powered by  💫 SANIJA-MD 🌐*`;
+    const caption = `╔═══〔 *𓆩SANIJA-MD𓆪 🎐* 〕═══
+║ 🎵 *Title:* ${vid.title}
+║ ⏱️ *Duration:* ${vid.timestamp}
+║ 👁️ *Views:* ${vid.views}
+║ 🎙️ *Channel:* ${vid.author.name}
+║ 🔗 *Link:* ${vid.url}
+╚═══════════════════`;
 
     const buttons = [
-      { buttonId: `${config.prefix}cancel`, buttonText: { displayText: '❌ Cancel' }, type: 1 },
-      { buttonId: `${config.prefix}doc`, buttonText: { displayText: '📄 Document' }, type: 1 },
-      { buttonId: `${config.prefix}listen`, buttonText: { displayText: '🎧 Listen' }, type: 1 }
+      { buttonId: `download_audio ${vid.url}`, buttonText: { displayText: "🎶 Download Audio" }, type: 1 },
+      { buttonId: `cancel_dl`, buttonText: { displayText: "❌ Cancel" }, type: 1 }
     ];
 
     await conn.sendMessage(from, {
-      image: { url: data.result.image || '' },
-      caption: ytmsg,
-      buttons: buttons,
+      image: { url: thumb },
+      caption,
+      footer: "Powered by 𓆩SANIJA-MD𓆪 🎐",
+      buttons,
       headerType: 4
     }, { quoted: mek });
 
-    setTimeout(async () => {
-      await conn.sendMessage(from, { delete: progressMessage.key });
-    }, 30000);
+  } catch (e) {
+    console.log(e);
+    reply("❌ Error occurred during audio search.");
+  }
+});
 
-    await conn.sendMessage(from, { audio: { url: data.result.downloadUrl }, mimetype: 'audio/mpeg' }, { quoted: mek });
+// 🔵 HANDLE BUTTON RESPONSES
+cmd({ on: "text" }, async (conn, mek, m, { body, from, reply }) => {
+  const [command, url] = body.split(" ");
+  if (!["download_audio", "download_video", "cancel_dl"].includes(command)) return;
+
+  if (command === "cancel_dl") {
+    if (activeDownloads.has(from)) {
+      clearTimeout(activeDownloads.get(from));
+      activeDownloads.delete(from);
+      return reply("✅ Download canceled successfully.");
+    } else {
+      return reply("❌ No active download to cancel.");
+    }
+  }
+
+  const isAudio = command === "download_audio";
+  const apiUrl = isAudio
+    ? `https://apis.davidcyriltech.my.id/youtube/mp3?url=${encodeURIComponent(url)}`
+    : `https://apis.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(url)}`;
+
+  try {
+    const progress = await conn.sendMessage(from, { text: `📀 [░░░░░░░░░░] 0% Starting...` }, { quoted: mek });
+
+    let percent = 0;
+    const bar = ["░", "▓"];
+    const updateInterval = setInterval(async () => {
+      percent += 10;
+      if (percent > 100) return;
+
+      const progBar = `📀 [${bar[1].repeat(percent / 10)}${bar[0].repeat(10 - percent / 10)}] ${percent}%`;
+      await conn.sendMessage(from, { edit: progress.key, text: `⏳ Downloading...\n\n${progBar}` });
+    }, 1000);
+
+    activeDownloads.set(from, updateInterval);
+
+    const res = await fetch(apiUrl);
+    const data = await res.json();
+
+    clearInterval(updateInterval);
+    activeDownloads.delete(from);
+
+    await conn.sendMessage(from, { delete: progress.key });
+
+    if (!data.success || !(data.result.downloadUrl || data.result.download_url)) {
+      return reply("❌ Failed to fetch media.");
+    }
+
+    const downloadUrl = data.result.downloadUrl || data.result.download_url;
+    const fileTitle = (data.result.title || "File").replace(/[^\w\s]/gi, "");
+
+    const sendOptions = isAudio
+      ? { audio: { url: downloadUrl }, mimetype: "audio/mpeg" }
+      : { video: { url: downloadUrl }, mimetype: "video/mp4" };
+
+    await conn.sendMessage(from, sendOptions, { quoted: mek });
+
+    // Also send as document
+    await conn.sendMessage(from, {
+      document: { url: downloadUrl },
+      mimetype: sendOptions.mimetype,
+      fileName: `${fileTitle}.${isAudio ? "mp3" : "mp4"}`,
+      caption: `✅ Downloaded Successfully!\n\n🎵 *${fileTitle}*\n\n> Powered by 𓆩SANIJA-MD𓆪 🎐`
+    }, { quoted: mek });
 
   } catch (e) {
     console.log(e);
-    reply("Error occurred, please try again later.");
+    reply("❌ Error while downloading.");
   }
 });
