@@ -16,11 +16,11 @@ const {
     Browsers,
     jidNormalizedUser,
     getContentType
-} = require('@whiskeysockets/baileys');
+} = require('baileys'); // Changed package name here
 const l = console.log;
 const { getBuffer, getGroupAdmins } = require('./lib/functions');
 const fs = require('fs');
-const axios = require('axios'); // Ensure axios is imported
+const axios = require('axios');
 const P = require('pino');
 const config = require('./config');
 const express = require("express");
@@ -71,7 +71,7 @@ async function connectToWA() {
             if (lastDisconnect.error) {
                 l("Connection closed due to error:", lastDisconnect.error);
             }
-            connectToWA(); // Uncomment this if you want to reconnect on any close event
+            connectToWA(); 
         } else if (connection === 'open') {
             l('♻️ CONNECTED TO WHATSAPP ENJOY ✅');
 
