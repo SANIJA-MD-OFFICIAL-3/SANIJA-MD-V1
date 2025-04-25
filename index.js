@@ -17,51 +17,41 @@ const {
     getContentType,
     fetchLatestBaileysVersion,
     Browsers
-} = require('@whiskeysockets/baileys')
+} = require('@whiskeysockets/baileys');
 
-const l = console.log
-const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson } = require('./lib/functions')
-const fs = require('fs')
-const ff = require('fluent-ffmpeg')
-const P = require('pino')
-const config = require('./config')
-const rankCommand = require('./plugins/rank')
-const qrcode = require('qrcode-terminal')
-const StickersTypes = require('wa-sticker-formatter')
-const util = require('util')
-const { sms, downloadMediaMessage } = require('./lib/msg')
-const axios = require('axios')
-const { File } = require('megajs')
-const { fromBuffer } = require('file-type')
-const bodyparser = require('body-parser')
-const { tmpdir } = require('os')
-const Crypto = require('crypto')
-const path = require('path')
-const prefix = config.PREFIX
-
-const ownerNumber = ['263780934873']
-
-//===================SESSION-AUTH============================
-if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
-    if (!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
-    const sessdata = config.SESSION_ID.replace("SANIJA-MD=", '');
-    const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
-    filer.download((err, data) => {
-        if (err) throw err
-        fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
-            console.log("SESSION DOWNLOADED COMPLETED ✅")
-        })
-    })
-}
-
+const l = console.log;
+const { getBuffer, getGroupAdmins } = require('./lib/functions');
+const fs = require('fs');
+const P = require('pino');
+const config = require('./config');
 const express = require("express");
+
 const app = express();
 const port = process.env.PORT || 9090;
 
+const ownerNumber = ['263780934873'];
+
+//===================SESSION-AUTH============================
+if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
+    if (!config.SESSION_ID) return l('Please add your session to SESSION_ID env !!');
+    const sessdata = config.SESSION_ID.replace("SANIJA-MD=", '');
+    const filer = File.fromURL(`https://mega.nz/file/${sessdata}`);
+    filer.download((err, data) => {
+        if (err) throw err;
+        fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
+            l("SESSION DOWNLOADED COMPLETED ✅");
+        });
+    });
+}
+
 async function connectToWA() {
-    console.log("CONNECTING SANIJA-MD 🧬...");
-    const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/sessions/')
-    var { version } = await fetchLatestBaileysVersion()
+    // Connect to WhatsApp
+    l("CONNECTING SANIJA-MD 🧬...");
+    const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/sessions/');
+    l("Auth state loaded.");
+    
+    var { version } = await fetchLatestBaileysVersion();
+    l("Fetched Baileys version:", version);
 
     const conn = makeWASocket({
         logger: P({ level: 'silent' }),
@@ -70,39 +60,49 @@ async function connectToWA() {
         syncFullHistory: true,
         auth: state,
         version
-    })
+    });
 
     conn.ev.on('connection.update', (update) => {
-        const { connection, lastDisconnect } = update
+        const { connection, lastDisconnect } = update;
+        l("Connection update:", { connection, lastDisconnect });
+
         if (connection === 'close') {
-            // Ensure lastDisconnect exists and has an error
-            if (lastDisconnect.error && lastDisconnect.error.output && lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut) {
-                connectToWA()
+            if (lastDisconnect.error) {
+                l("Connection closed due to error:", lastDisconnect.error);
             }
+            connectToWA(); // Uncomment this if you want to reconnect on any close event
         } else if (connection === 'open') {
-            console.log('♻️ DOWNLOADING AND INSTALLING PLUGINS FILES PLEASE WAIT... 🪄')
-            fs.readdirSync("./plugins/").forEach((plugin) => {
-                if (path.extname(plugin).toLowerCase() === ".js") {
-                    require("./plugins/" + plugin);
-                }
-            });
-            console.log('PLUGINS FILES INSTALL SUCCESSFULLY ✅')
-            console.log('SANIJA-MD CONNECTED TO WHATSAPP ENJOY ✅')
+            l('♻️ CONNECTED TO WHATSAPP ENJOY ✅');
+            // Load plugins or any initial data handling here
+            // Example:
+            // initializePlugins(conn);
 
             let up = `*╭──────────────●●►*
-            > *➺ SANIJA-MD ᴄᴏɴɴᴇᴄᴛᴇᴅ sᴜᴄᴄᴇssғᴜʟʏ ᴛʏᴘᴇ .ᴍᴇɴᴜ2 ᴛᴏ ᴄᴏᴍᴍᴀɴᴅ ʟɪsᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ Sanija Nimtharu ✅*
+> *➺ SANIJA-MD ᴄᴏɴɴᴇᴄᴛᴇᴅ sᴜᴄᴄᴇssғᴜʟʏ ᴛʏᴘᴇ .ᴍᴇɴᴜ2 ᴛᴏ ᴄᴏᴍᴍᴀɴᴅ ʟɪsᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ Sanija Nimtharu ✅*
 
-            > *❁ᴊᴏɪɴ ᴏᴜʀ ᴡʜᴀᴛsᴀᴘᴘ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴜᴘᴅᴀᴛᴇs 
+> *❁ᴊᴏɪɴ ᴏᴜʀ ᴡʜᴀᴛsᴀᴘᴘ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴜᴘᴅᴀᴛᴇs*
 
-            *https://www.whatsapp.com/channel/0029Vai5pJa5vK9zcGR1PX2f*
+*https://www.whatsapp.com/channel/0029Vai5pJa5vK9zcGR1PX2f*
 
-            *YOUR BOT ACTIVE NOW ENJOY♥️🪄*\n\n*PREFIX: ${prefix}*
+*YOUR BOT ACTIVE NOW ENJOY♥️🪄*\n\n*PREFIX: ${config.PREFIX}*
 
-            *╰──────────────●●►*`;
-            conn.sendMessage(conn.user.id, { image: { url: config.START_IMG }, caption: up })
+*╰──────────────●●►*`;
+            conn.sendMessage(conn.user.id, { image: { url: config.START_IMG }, caption: up });
         }
-    })
-    conn.ev.on('creds.update', saveCreds)
+    });
+    
+    conn.ev.on('creds.update', saveCreds);
+}
+
+app.get("/", (req, res) => {
+    res.send("HEY, SANIJA-MD STARTED ✅");
+});
+app.listen(port, () => l(`Server listening on port http://localhost:${port}`));
+
+// Start the connection process
+setTimeout(() => {
+    connectToWA();
+}, 4000);
 
     //=============readstatus=======
     conn.ev.on('messages.upsert', async (mek) => {
