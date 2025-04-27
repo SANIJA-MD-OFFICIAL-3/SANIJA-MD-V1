@@ -73,16 +73,16 @@ connectToWA()
 } else if (connection === 'open') {
 console.log('♻️ INSTALLING PLUGINS FILES PLEASE WAIT... 🪄')
 const path = require('path');
-fs.readdirSync("./plugins/").forEach((plugin) => {
+fs.readdirSync("https://github.com/SANIJA-MD-BOT-TESTER/plugin/./plugins/").forEach((plugin) => {
 if (path.extname(plugin).toLowerCase() == ".js") {
-require("./plugins/" + plugin);
+require("https://github.com/SANIJA-MD-BOT-TESTER/plugin/./plugins/" + plugin);
 }
 });
 console.log('PLUGINS FILES INSTALL SUCCESSFULLY ✅')
 console.log('SANIJA-MD CONNECTED TO WHATSAPP ENJOY ✅')
 
 let up = `*╭──────────────●●►*
-> *➺ LITE-MD ᴄᴏɴɴᴇᴄᴛᴇᴅ sᴜᴄᴄᴇssғᴜʟʏ ᴛʏᴘᴇ .ᴍᴇɴᴜ ᴛᴏ ᴄᴏᴍᴍᴀɴᴅ ʟɪsᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ Sanija Nimtharu ✅*
+> *➺ SANIJA-MD ᴄᴏɴɴᴇᴄᴛᴇᴅ sᴜᴄᴄᴇssғᴜʟʏ ᴛʏᴘᴇ .ᴍᴇɴᴜ ᴛᴏ ᴄᴏᴍᴍᴀɴᴅ ʟɪsᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ Sanija Nimtharu ✅*
 
 > *❁ᴊᴏɪɴ ᴏᴜʀ ᴡʜᴀᴛsᴀᴘᴘ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴜᴘᴅᴀᴛᴇs 
 
@@ -91,7 +91,7 @@ let up = `*╭──────────────●●►*
 *YOUR BOT ACTIVE NOW ENJOY♥️🪄*\n\n*PREFIX: ${prefix}*
 
 *╰──────────────●●►*`;
-conn.sendMessage(conn.user.id, { image: { url: config.MENU_IMG }, caption: up })
+conn.sendMessage(conn.user.id, { image: { url: "https://files.catbox.moe/d2d02k.png" }, caption: up })
 
 }
 })
