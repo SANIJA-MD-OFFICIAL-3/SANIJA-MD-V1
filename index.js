@@ -73,9 +73,9 @@ connectToWA()
 } else if (connection === 'open') {
 console.log('♻️ INSTALLING PLUGINS FILES PLEASE WAIT... 🪄')
 const path = require('path');
-fs.readdirSync("https://github.com/SANIJA-MD-BOT-TESTER/plugin/tree/main/plugins").forEach((plugin) => {
+fs.readdirSync("./plugins/").forEach((plugin) => {
 if (path.extname(plugin).toLowerCase() == ".js") {
-require("https://github.com/SANIJA-MD-BOT-TESTER/plugin/tree/main/plugins" + plugin);
+require("./plugins/" + plugin);
 }
 });
 console.log('PLUGINS FILES INSTALL SUCCESSFULLY ✅')
