@@ -91,7 +91,7 @@ let up = `*╭──────────────●●►*
 *YOUR BOT ACTIVE NOW ENJOY♥️🪄*\n\n*PREFIX: ${prefix}*
 
 *╰──────────────●●►*`;
-conn.sendMessage(conn.user.id, { image: { url: "https://files.catbox.moe/d2d02k.png" }, caption: up })
+conn.sendMessage(conn.user.id, { image: { url: config.START_IMG }, caption: up })
 
 }
 })
