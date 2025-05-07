@@ -5,7 +5,7 @@ const wiki = require('wikipedia');
 // Define the Wikipedia search command
 cmd({
     pattern: "wiki",
-    react: "📚"
+    react: "📚",
     desc: "Search Wikipedia for information",
     category: "main",
     filename: __filename
