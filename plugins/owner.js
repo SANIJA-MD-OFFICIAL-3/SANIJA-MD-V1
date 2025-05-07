@@ -1,1 +1,276 @@
-const _0x282092=_0x2c26;function _0x20b6(){const _0x21501b=['axios','135506yNAIMd','❌\x20Please\x20reply\x20to\x20the\x20user\x20you\x20want\x20to\x20block.','❌\x20Error\x20unblocking\x20user:\x20','❌\x20You\x20are\x20not\x20the\x20owner!','restart\x20the\x20bot','16832DfNvbi','toFixed','613724hTnwPw','Block\x20a\x20user.','𝗣𝗶𝗻𝗴𝗶𝗻𝗴...','unblock','ALIVE_IMG','botinfo','log','then','6yKjtaS','❌\x20Error\x20blocking\x20user:\x20','all','keys','shutdown','updateBlockStatus','\x20unblocked\x20successfully.','user','Unblock\x20a\x20user.','❌\x20Error\x20updating\x20profile\x20picture:\x20','775401ItGVWj','error','ping','❌\x20Please\x20reply\x20to\x20the\x20user\x20you\x20want\x20to\x20unblock.','only\x20for\x20owner','message','../command','hostname','190102wyMbFY','alive','updateProfilePicture','owner\x20the\x20bot','🖼️','❌\x20Error\x20clearing\x20chats:\x20','👨‍💻','┌───────────────────────\x0a├\x20⏰\x20*Runtime:-*\x20','Set\x20bot\x20profile\x20picture.','🧹\x20All\x20chats\x20cleared\x20successfully!','../lib/functions','Get\x20the\x20JID\x20of\x20the\x20chat.','chats','*\x0a\x0a*👨‍💻SANIJA-MD\x20👨‍💻*\x0a\x0a>\x20*𝗢𝗪𝗡𝗘𝗥\x20𝗜𝗡𝗙𝗢*\x20\x0a\x0a*⚡Owner\x20name\x20-:\x20Sanija\x20Nimtharu*\x0a*⚡Number*\x20-:\x20+94767858145\x0a\x0a\x20⚡️◦\x20https://www.whatsapp.com/channel/0029Vai5pJa5vK9zcGR1PX2f\x0a\x0a>\x20*Powered\x20by\x20SANIJA-MD*\x0a','Broadcast\x20a\x20message\x20to\x20all\x20groups.','clearchats','owner','MENU_IMG','Check\x20bot\x27s\x20response\x20time.','\x0a├\x20📟\x20*Ram\x20usage:-*\x20','\x20blocked\x20successfully.','restarting...','📢\x20Please\x20provide\x20a\x20message\x20to\x20broadcast.','imageMessage','*📍ℝ𝔼ℙ𝕆-𝕃𝕀ℕ𝕂\x20❤️‍🔥👇*\x0a\x0a👨‍💻◦https://github.com/SANIJA-MD-OFFICIAL-3/SANIJA-MD_V1\x0a\x0a\x0a*📍ℙ𝕃𝔼𝔸𝕊𝔼\x20𝔽𝕆𝕃𝕃𝕆𝕎\x20𝕄𝕐\x20𝕎ℍ𝔸𝕋𝕊𝔸ℙℙ\x20ℂℍ𝔸ℕℕ𝔼𝕃\x20❤️‍🔥👇*\x0a\x0a👨‍💻◦\x20https://www.whatsapp.com/channel/0029Vai5pJa5vK9zcGR1PX2f\x0a\x0a>\x20*Powered\x20by\x20SANIJA-MD*\x0a','exit','234MxzmXh','📍\x20Ping\x20:\x20','system','sender','🛑\x20Shutting\x20down...','totalmem','join','ALIVE_MSG','MB\x20/\x20','repo','70FEKgfv','START_IMG','Clear\x20all\x20chats\x20from\x20the\x20bot.','3xBTnRh','now','📢\x20Message\x20broadcasted\x20to\x20all\x20groups.','child_process','broadcast','*👋\x20Hello\x20','delete','sendMessage','downloadMediaMessage','🚫\x20User\x20','1478477rAmVaC','restart','Shutdown\x20the\x20bot.','380320aPmEnX','❌\x20Please\x20reply\x20to\x20an\x20image.','jid','Check\x20bot\x20online\x20or\x20no.','round'];_0x20b6=function(){return _0x21501b;};return _0x20b6();}(function(_0x426aa4,_0x232f58){const _0x475fe8=_0x2c26,_0x10c0e0=_0x426aa4();while(!![]){try{const _0x54d1c7=parseInt(_0x475fe8(0x1a1))/0x1+parseInt(_0x475fe8(0x1c2))/0x2*(parseInt(_0x475fe8(0x18e))/0x3)+-parseInt(_0x475fe8(0x1a8))/0x4+-parseInt(_0x475fe8(0x19b))/0x5*(parseInt(_0x475fe8(0x1b0))/0x6)+-parseInt(_0x475fe8(0x198))/0x7+parseInt(_0x475fe8(0x1a6))/0x8*(-parseInt(_0x475fe8(0x1dc))/0x9)+-parseInt(_0x475fe8(0x18b))/0xa*(-parseInt(_0x475fe8(0x1ba))/0xb);if(_0x54d1c7===_0x232f58)break;else _0x10c0e0['push'](_0x10c0e0['shift']());}catch(_0x2039ba){_0x10c0e0['push'](_0x10c0e0['shift']());}}}(_0x20b6,0x37ce8));const axios=require(_0x282092(0x1a0)),config=require('../config'),{cmd,commands}=require(_0x282092(0x1c0)),os=require('os'),{exec}=require('child_process'),{runtime}=require(_0x282092(0x1cc));function _0x2c26(_0x599ed0,_0x596ffb){const _0x20b6f0=_0x20b6();return _0x2c26=function(_0x2c2621,_0x351380){_0x2c2621=_0x2c2621-0x187;let _0x551b65=_0x20b6f0[_0x2c2621];return _0x551b65;},_0x2c26(_0x599ed0,_0x596ffb);}cmd({'pattern':'owner','desc':_0x282092(0x1c5),'category':'owner','react':_0x282092(0x1c8),'filename':__filename},async(_0x265246,_0x5e60c2,_0x232228,{from:_0x18c1f1,quoted:_0x427550,body:_0x538d2e,isCmd:_0x171855,command:_0x366680,args:_0xfe3595,q:_0x421db8,isGroup:_0x42ae5c,sender:_0xc6c931,senderNumber:_0x5cbd10,botNumber2:_0x5c3e19,botNumber:_0x1d1df8,pushname:_0x115638,isMe:_0x431f13,isOwner:_0x2bdca6,groupMetadata:_0x251aa2,groupName:_0x3dc22c,participants:_0x5af53c,groupAdmins:_0x4ef802,isBotAdmins:_0x1e0f65,isAdmins:_0x31aa09,reply:_0x729c5e})=>{const _0x166d11=_0x282092;try{let _0x2d8609=_0x166d11(0x193)+_0x115638+_0x166d11(0x1cf);await _0x265246[_0x166d11(0x195)](_0x18c1f1,{'image':{'url':config[_0x166d11(0x1d3)]},'caption':_0x2d8609},{'quoted':_0x5e60c2});}catch(_0x48f671){console[_0x166d11(0x1ae)](_0x48f671),_0x729c5e(''+_0x48f671);}}),cmd({'pattern':_0x282092(0x18a),'desc':'repo\x20the\x20bot','react':'📡','category':_0x282092(0x1d2),'filename':__filename},async(_0x47806c,_0x45afaf,_0x18428c,{from:_0x264673,quoted:_0x4615e8,body:_0x405d1d,isCmd:_0x2cfa8e,command:_0x465c59,args:_0x18c70e,q:_0x182d96,isGroup:_0x17fe68,sender:_0x400ee9,senderNumber:_0x39cd9d,botNumber2:_0x339ff5,botNumber:_0x552ce2,pushname:_0x59c045,isMe:_0xaea409,isOwner:_0x16368f,groupMetadata:_0xe07739,groupName:_0x5737c1,participants:_0xeef695,groupAdmins:_0x2fba8e,isBotAdmins:_0x4b9e98,isAdmins:_0x3f99c0,reply:_0x41a55b})=>{const _0x25842e=_0x282092;try{let _0x2d4232=_0x25842e(0x1da);await _0x47806c[_0x25842e(0x195)](_0x264673,{'image':{'url':config[_0x25842e(0x18c)]},'caption':_0x2d4232},{'quoted':_0x45afaf});}catch(_0x509db3){console[_0x25842e(0x1ae)](_0x509db3),_0x41a55b(''+_0x509db3);}}),cmd({'pattern':_0x282092(0x1de),'alias':['status',_0x282092(0x1ad)],'desc':'Check\x20up\x20time\x20,\x20ram\x20usage\x20and\x20more','category':_0x282092(0x1d2),'filename':__filename},async(_0x3cfb8b,_0x4ac1f5,_0x2e2116,{from:_0x243cd2,quoted:_0x272508,body:_0x192bc2,isCmd:_0x1d8b4c,command:_0x424217,args:_0x2197b2,q:_0x426ad3,isGroup:_0x45bca6,sender:_0x4155e1,senderNumber:_0x3af320,botNumber2:_0x41c14a,botNumber:_0x5934b4,pushname:_0x231743,isMe:_0x4fe9dd,isOwner:_0x28284c,groupMetadata:_0x2127e8,groupName:_0x40f760,participants:_0x48e71a,groupAdmins:_0x2ff177,isBotAdmins:_0x492ee8,isAdmins:_0xf1b2d7,reply:_0x1429e8})=>{const _0x3e48e2=_0x282092;try{let _0x327148=_0x3e48e2(0x1c9)+runtime(process['uptime']())+_0x3e48e2(0x1d5)+(process['memoryUsage']()['heapUsed']/0x400/0x400)[_0x3e48e2(0x1a7)](0x2)+_0x3e48e2(0x189)+Math[_0x3e48e2(0x19f)](require('os')[_0x3e48e2(0x1e1)]/0x400/0x400)+'MB\x0a├\x20⚙️\x20*Platform:-*\x20'+os[_0x3e48e2(0x1c1)]()+'\x0a├\x20👨‍💻\x20*Owners:-*\x20Sanija\x20Nimtharu\x0a├\x20🧬\x20*Version:-*\x201.0.0\x0a└───────────────────────\x0a\x0a>\x20*𝘗𝘖𝘞𝘌𝘙𝘌𝘋\x20𝘣𝘺\x20SANIJA-MD*\x0a';return _0x1429e8(''+_0x327148);}catch(_0x171c8d){console[_0x3e48e2(0x1ae)](_0x171c8d),_0x1429e8(''+_0x171c8d);}}),cmd({'pattern':_0x282092(0x1c3),'desc':_0x282092(0x19e),'react':'👋','category':_0x282092(0x1d2),'filename':__filename},async(_0x19c57c,_0x80e303,_0x1417e2,{from:_0x31a826,quoted:_0x16baf8,body:_0x56802e,isCmd:_0x471f79,command:_0x2ef8c1,args:_0x502707,q:_0x1cb256,isGroup:_0x3129d6,sender:_0x597f0a,senderNumber:_0x5692fb,botNumber2:_0x9ed753,botNumber:_0x574993,pushname:_0x32706d,isMe:_0x43156c,isOwner:_0x470b6f,groupMetadata:_0x50e5a5,groupName:_0x24b417,participants:_0x59bdd9,groupAdmins:_0x4af250,isBotAdmins:_0x34daa2,isAdmins:_0x21831b,reply:_0x3619e7})=>{const _0x441fe1=_0x282092;try{return await _0x19c57c[_0x441fe1(0x195)](_0x31a826,{'image':{'url':config[_0x441fe1(0x1ac)]},'caption':config[_0x441fe1(0x188)]},{'quoted':_0x80e303});}catch(_0x467eda){console['log'](_0x467eda),_0x3619e7(''+_0x467eda);}}),cmd({'pattern':_0x282092(0x19d),'desc':_0x282092(0x1cd),'category':'owner','filename':__filename},async(_0x4a77fd,_0xbde32,_0x1cc09e,{from:_0x448620,reply:_0x506b8d})=>{const _0x1cfbb3=_0x282092;try{const _0x2f9611=_0x448620;await _0x506b8d(''+_0x2f9611);}catch(_0xa5b694){console[_0x1cfbb3(0x1bb)](_0xa5b694),_0x506b8d(''+_0xa5b694);}}),cmd({'pattern':_0x282092(0x199),'desc':_0x282092(0x1a5),'react':'🔄','category':_0x282092(0x1d2),'filename':__filename},async(_0x4d5d57,_0x2a4b22,_0x203edb,{from:_0x533b98,quoted:_0xbdbe2f,body:_0x47cf97,isCmd:_0x4f5d5f,command:_0xd856a9,args:_0x466db4,q:_0x53d6ed,isGroup:_0x30f1b3,sender:_0x3f340d,senderNumber:_0x24f5d0,botNumber2:_0x477ea0,botNumber:_0x273e77,pushname:_0x522146,isMe:_0x491e94,isOwner:_0x9c3503,groupMetadata:_0x2ac941,groupName:_0x2710a2,participants:_0x13cc3b,groupAdmins:_0x760165,isBotAdmins:_0x8c2291,isAdmins:_0x2b9b2a,reply:_0x10c104})=>{const _0x3c6aa3=_0x282092;try{if(!_0x9c3503)return _0x10c104(_0x3c6aa3(0x1be));const {exec:_0xb11142}=require(_0x3c6aa3(0x191));_0x10c104(_0x3c6aa3(0x1d7)),await sleep(0x5dc),_0xb11142('pm2\x20restart\x20all');}catch(_0x37e0c5){console[_0x3c6aa3(0x1ae)](_0x37e0c5),_0x10c104(''+_0x37e0c5);}}),cmd({'pattern':_0x282092(0x1b4),'desc':_0x282092(0x19a),'category':_0x282092(0x1d2),'react':'🛑','filename':__filename},async(_0x49d57a,_0x17eb0a,_0x28fa22,{from:_0x3654a0,isOwner:_0x5c7ce2,reply:_0x1e6c67})=>{const _0xd0c253=_0x282092;if(!_0x5c7ce2)return _0x1e6c67('❌\x20You\x20are\x20not\x20the\x20owner!');_0x1e6c67(_0xd0c253(0x1e0))[_0xd0c253(0x1af)](()=>process[_0xd0c253(0x1db)]());}),cmd({'pattern':_0x282092(0x192),'desc':_0x282092(0x1d0),'category':_0x282092(0x1d2),'react':'📢','filename':__filename},async(_0x533687,_0x62e697,_0x2ec471,{from:_0x54efe8,isOwner:_0x20c9ef,args:_0x2cf9af,reply:_0x4d6b06})=>{const _0x52647a=_0x282092;if(!_0x20c9ef)return _0x4d6b06(_0x52647a(0x1a4));if(_0x2cf9af['length']===0x0)return _0x4d6b06(_0x52647a(0x1d8));const _0x7ffb0f=_0x2cf9af[_0x52647a(0x187)]('\x20'),_0x336068=Object[_0x52647a(0x1b3)](await _0x533687['groupFetchAllParticipating']());for(const _0x5a4f06 of _0x336068){await _0x533687['sendMessage'](_0x5a4f06,{'text':_0x7ffb0f},{'quoted':_0x62e697});}_0x4d6b06(_0x52647a(0x190));}),cmd({'pattern':'setpp','desc':_0x282092(0x1ca),'category':_0x282092(0x1d2),'react':_0x282092(0x1c6),'filename':__filename},async(_0x1e6999,_0x5be5b0,_0x4fa5e0,{from:_0x5de876,isOwner:_0x3fb5ee,quoted:_0x50613c,reply:_0x470fbb})=>{const _0x235332=_0x282092;if(!_0x3fb5ee)return _0x470fbb(_0x235332(0x1a4));if(!_0x50613c||!_0x50613c[_0x235332(0x1bf)][_0x235332(0x1d9)])return _0x470fbb(_0x235332(0x19c));try{const _0x27bbf5=await _0x1e6999[_0x235332(0x196)](_0x50613c);await _0x1e6999[_0x235332(0x1c4)](_0x1e6999[_0x235332(0x1b7)][_0x235332(0x19d)],{'url':_0x27bbf5}),_0x470fbb('🖼️\x20Profile\x20picture\x20updated\x20successfully!');}catch(_0x3c39b9){_0x470fbb(_0x235332(0x1b9)+_0x3c39b9['message']);}}),cmd({'pattern':'block','desc':_0x282092(0x1a9),'category':_0x282092(0x1d2),'react':'🚫','filename':__filename},async(_0x5e12a1,_0x1272b2,_0x536269,{from:_0x5916cc,isOwner:_0x272dba,quoted:_0x309c89,reply:_0x1405ca})=>{const _0x3a27e9=_0x282092;if(!_0x272dba)return _0x1405ca('❌\x20You\x20are\x20not\x20the\x20owner!');if(!_0x309c89)return _0x1405ca(_0x3a27e9(0x1a2));const _0x3d4298=_0x309c89[_0x3a27e9(0x1df)];try{await _0x5e12a1[_0x3a27e9(0x1b5)](_0x3d4298,'block'),_0x1405ca(_0x3a27e9(0x197)+_0x3d4298+_0x3a27e9(0x1d6));}catch(_0x594752){_0x1405ca(_0x3a27e9(0x1b1)+_0x594752['message']);}}),cmd({'pattern':_0x282092(0x1ab),'desc':_0x282092(0x1b8),'category':_0x282092(0x1d2),'react':'✅','filename':__filename},async(_0x55c7ed,_0x4d9db9,_0x4567f4,{from:_0x22e218,isOwner:_0x5f3870,quoted:_0x532ce8,reply:_0x3b95d1})=>{const _0xfbf413=_0x282092;if(!_0x5f3870)return _0x3b95d1(_0xfbf413(0x1a4));if(!_0x532ce8)return _0x3b95d1(_0xfbf413(0x1bd));const _0x299bb3=_0x532ce8[_0xfbf413(0x1df)];try{await _0x55c7ed[_0xfbf413(0x1b5)](_0x299bb3,'unblock'),_0x3b95d1('✅\x20User\x20'+_0x299bb3+_0xfbf413(0x1b6));}catch(_0x34bd98){_0x3b95d1(_0xfbf413(0x1a3)+_0x34bd98['message']);}}),cmd({'pattern':_0x282092(0x1d1),'desc':_0x282092(0x18d),'category':'owner','react':'🧹','filename':__filename},async(_0x3eb422,_0x49e034,_0x555c3c,{from:_0x2695c4,isOwner:_0x5edf61,reply:_0x260bf0})=>{const _0x2029c7=_0x282092;if(!_0x5edf61)return _0x260bf0('❌\x20You\x20are\x20not\x20the\x20owner!');try{const _0x171617=_0x3eb422[_0x2029c7(0x1ce)][_0x2029c7(0x1b2)]();for(const _0x41ed42 of _0x171617){await _0x3eb422['modifyChat'](_0x41ed42[_0x2029c7(0x19d)],_0x2029c7(0x194));}_0x260bf0(_0x2029c7(0x1cb));}catch(_0x454535){_0x260bf0(_0x2029c7(0x1c7)+_0x454535['message']);}}),cmd({'pattern':_0x282092(0x1bc),'desc':_0x282092(0x1d4),'category':_0x282092(0x1d2),'react':'✅','filename':__filename},async(_0x1270c8,_0x26f8e7,_0x382883,{from:_0x3369fb,quoted:_0x180eb8,body:_0x3904e9,isCmd:_0x4499c9,command:_0x127894,args:_0x8be23,q:_0x2f3f33,isGroup:_0x47b256,sender:_0x44fd6f,senderNumber:_0x58a72d,botNumber2:_0x1bc066,botNumber:_0x4ead54,pushname:_0x599a84,isMe:_0x2e1c2d,isOwner:_0x2b305c,groupMetadata:_0x5d9c82,groupName:_0x407eef,participants:_0x16107d,groupAdmins:_0x17d318,isBotAdmins:_0x1b7897,isAdmins:_0x325391,reply:_0x6f1548})=>{const _0xa1c032=_0x282092;try{const _0x288ef1=Date['now'](),_0x1dff2b=await _0x1270c8[_0xa1c032(0x195)](_0x3369fb,{'text':_0xa1c032(0x1aa)}),_0x502546=Date[_0xa1c032(0x18f)](),_0x53e537=_0x502546-_0x288ef1;await _0x1270c8[_0xa1c032(0x195)](_0x3369fb,{'text':_0xa1c032(0x1dd)+_0x53e537+'ms'},{'quoted':_0x1dff2b});}catch(_0x22e2e1){console[_0xa1c032(0x1ae)](_0x22e2e1),_0x6f1548(''+_0x22e2e1);}});
+const axios = require('axios');
+const config = require('../config')
+const {cmd , commands} = require('../command')
+const os = require("os")
+const { exec } = require('child_process')
+const {runtime} = require('../lib/functions')
+
+
+cmd({
+    pattern: "owner",
+    desc: "owner the bot",
+    category: "owner",
+    react: "👨‍💻",
+    filename: __filename
+},
+
+async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
+
+let dec = `*👋 Hello ${pushname}*
+
+*👨‍💻SANIJA-MD 👨‍💻*
+
+> *𝗢𝗪𝗡𝗘𝗥 𝗜𝗡𝗙𝗢* 
+
+*⚡Owner name -: Sanija Nimtharu*
+*⚡Number* -: +94767858145
+
+ ⚡️◦ https://www.whatsapp.com/channel/0029Vai5pJa5vK9zcGR1PX2f
+
+> *Powered by SANIJA-MD*
+`;
+await conn.sendMessage(from,{image:{url:config.MENU_IMG},caption:dec},{quoted:mek});
+
+}catch(e){
+console.log(e)
+reply(`${e}`)
+}
+});
+
+cmd({
+    pattern: "repo",
+    desc: "repo the bot",
+    react: "📡",
+    category: "owner",
+    filename: __filename
+},
+
+async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
+
+let dec = `*📍ℝ𝔼ℙ𝕆-𝕃𝕀ℕ𝕂 ❤️‍🔥👇*
+
+👨‍💻◦https://github.com/SANIJA-MD-OFFICIAL/SANIJA-MD_V1
+
+
+*📍ℙ𝕃𝔼𝔸𝕊𝔼 𝔽𝕆𝕃𝕃𝕆𝕎 𝕄𝕐 𝕎ℍ𝔸𝕋𝕊𝔸ℙℙ ℂℍ𝔸ℕℕ𝔼𝕃 ❤️‍🔥👇*
+
+👨‍💻◦ https://www.whatsapp.com/channel/0029Vai5pJa5vK9zcGR1PX2f
+
+> *Powered by SANIJA-MD*
+`;
+await conn.sendMessage(from,{image:{url: config.MENU_IMG},caption:dec},{quoted:mek});
+
+}catch(e){
+console.log(e)
+reply(`${e}`)
+}
+});
+cmd({
+    pattern: "system",
+    alias: ["status","botinfo"],
+    desc: "Check up time , ram usage and more",
+    category: "owner",
+    filename: __filename
+},
+async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
+let status = `┌───────────────────────
+├ ⏰ *Runtime:-* ${runtime(process.uptime())}
+├ 📟 *Ram usage:-* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
+├ ⚙️ *Platform:-* ${os.hostname()}
+├ 👨‍💻 *Owners:-* your name
+├ 🧬 *Version:-* 1.0.0
+└───────────────────────
+
+> *𝘗𝘖𝘞𝘌𝘙𝘌𝘋 𝘣𝘺 Your Botname*
+`;
+return reply(`${status}`)
+  
+}catch(e){
+console.log(e)
+reply(`${e}`)
+
+}
+})
+
+cmd({
+    pattern: "jid",
+    desc: "Get the JID of the chat.",
+    category: "owner",
+   // react: "🔍",
+    filename: __filename
+}, async (conn, mek, m, { from, reply }) => {
+    try {
+       
+        
+        const chatJid = from;
+
+        
+       await reply (`${chatJid}`)
+
+    } catch (e) {
+        console.error(e);
+        reply(`${e}`);
+    }
+});
+
+cmd({
+    pattern: "restart",
+    desc: "restart the bot",
+    react :"🔄",
+    category: "owner",
+    filename: __filename
+},
+async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
+if(!isOwner) return reply(`only for owner`);
+const {exec} = require("child_process")
+reply("restarting...")
+await sleep(1500)
+exec("pm2 restart all")
+}catch(e){
+console.log(e)
+reply(`${e}`)
+}
+})
+// 1. Shutdown Bot
+cmd({
+    pattern: "shutdown",
+    desc: "Shutdown the bot.",
+    category: "owner",
+    react: "🛑",
+    filename: __filename
+},
+async (conn, mek, m, { from, isOwner, reply }) => {
+    if (!isOwner) return reply("❌ You are not the owner!");
+    reply("🛑 Shutting down...").then(() => process.exit());
+});
+
+// 2. Broadcast Message to All Groups
+cmd({
+    pattern: "broadcast",
+    desc: "Broadcast a message to all groups.",
+    category: "owner",
+    react: "📢",
+    filename: __filename
+},
+async (conn, mek, m, { from, isOwner, args, reply }) => {
+    if (!isOwner) return reply("❌ You are not the owner!");
+    if (args.length === 0) return reply("📢 Please provide a message to broadcast.");
+
+    const message = args.join(' ');
+    const groups = Object.keys(await conn.groupFetchAllParticipating());
+
+    for (const groupId of groups) {
+        await conn.sendMessage(groupId, { text: message }, { quoted: mek });
+    }
+
+    reply("📢 Message broadcasted to all groups.");
+});
+
+// 3. Set Profile Picture
+cmd({
+    pattern: "setpp",
+    desc: "Set bot profile picture.",
+    category: "owner",
+    react: "🖼️",
+    filename: __filename
+},
+async (conn, mek, m, { from, isOwner, quoted, reply }) => {
+    if (!isOwner) return reply("❌ You are not the owner!");
+    if (!quoted || !quoted.message.imageMessage) return reply("❌ Please reply to an image.");
+
+    try {
+        const media = await conn.downloadMediaMessage(quoted);
+        await conn.updateProfilePicture(conn.user.jid, { url: media });
+        reply("🖼️ Profile picture updated successfully!");
+    } catch (error) {
+        reply(`❌ Error updating profile picture: ${error.message}`);
+    }
+});
+
+// 4. Block User
+cmd({
+    pattern: "block",
+    desc: "Block a user.",
+    category: "owner",
+    react: "🚫",
+    filename: __filename
+},
+async (conn, mek, m, { from, isOwner, quoted, reply }) => {
+    if (!isOwner) return reply("❌ You are not the owner!");
+    if (!quoted) return reply("❌ Please reply to the user you want to block.");
+
+    const user = quoted.sender;
+    try {
+        await conn.updateBlockStatus(user, 'block');
+        reply(`🚫 User ${user} blocked successfully.`);
+    } catch (error) {
+        reply(`❌ Error blocking user: ${error.message}`);
+    }
+});
+
+// 5. Unblock User
+cmd({
+    pattern: "unblock",
+    desc: "Unblock a user.",
+    category: "owner",
+    react: "✅",
+    filename: __filename
+},
+async (conn, mek, m, { from, isOwner, quoted, reply }) => {
+    if (!isOwner) return reply("❌ You are not the owner!");
+    if (!quoted) return reply("❌ Please reply to the user you want to unblock.");
+
+    const user = quoted.sender;
+    try {
+        await conn.updateBlockStatus(user, 'unblock');
+        reply(`✅ User ${user} unblocked successfully.`);
+    } catch (error) {
+        reply(`❌ Error unblocking user: ${error.message}`);
+    }
+});
+
+
+// 6. Clear All Chats
+cmd({
+    pattern: "clearchats",
+    desc: "Clear all chats from the bot.",
+    category: "owner",
+    react: "🧹",
+    filename: __filename
+},
+async (conn, mek, m, { from, isOwner, reply }) => {
+    if (!isOwner) return reply("❌ You are not the owner!");
+    try {
+        const chats = conn.chats.all();
+        for (const chat of chats) {
+            await conn.modifyChat(chat.jid, 'delete');
+        }
+        reply("🧹 All chats cleared successfully!");
+    } catch (error) {
+        reply(`❌ Error clearing chats: ${error.message}`);
+    }
+});
+
+cmd({
+    pattern: "ping",
+    desc: "Check bot's response time.",
+    category: "owner",
+    react: "✅",
+    filename: __filename
+},
+async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        const startTime = Date.now()
+        const message = await conn.sendMessage(from, { text: '𝗣𝗶𝗻𝗴𝗶𝗻𝗴...' })
+        const endTime = Date.now()
+        const ping = endTime - startTime
+        await conn.sendMessage(from, { text: `📍 Ping : ${ping}ms` }, { quoted: message })
+    } catch (e) {
+        console.log(e)
+        reply(`${e}`)
+    }
+});
